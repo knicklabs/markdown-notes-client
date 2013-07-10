@@ -111,6 +111,9 @@
 
       initialize: function() {
         _.bindAll(this, 'render', 'unrender', 'remove', 'view');
+
+        this.model.bind('change:title', this.render);
+        this.model.bind('remove', this.unrender);
       },
 
       render: function() {
@@ -122,6 +125,10 @@
 
       unrender: function() {
         $(this.el).remove();
+      },
+
+      remove: function() {
+        this.model.destroy();
       },
 
       view: function() {
