@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Markdown Notes</title>
+
+  <script src="vendor/js/jquery.js"></script>
+  <script src="vendor/js/underscore.js"></script>
+  <script src="vendor/js/json2.js"></script>
+  <script src="vendor/js/backbone.js"></script>
+  <script src="vendor/js/showdown.js"></script>
+  <script src="js/app.js"></script>
+
+  <link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+  <!-- JavaScript templates -->
+  <script type="text/template" id="main-template">
+    <header id="header"><h1>Markdown Notes</h1></header>
+    <aside id="sidebar"></aside>
+    <div id="main"></div>
+  </script>
+
+  <script type="text/template" id="list-template">
+    <div class="controls">
+      <input name="title" type="text" placeholder="Your title here...">
+      <button class="add">New</button>
+    </div>
+    <div class="list-wrapper">
+      <ul class="list side-nav"></ul>
+    </div>
+  </script>
+
+  <script type="text/template" id="item-template">
+    <span class="title"><%= note.get('title') %></span>
+    <div class="controls">
+      <span class="view">View</span>
+      <span class="remove">Remove</span>
+    </div>
+  </script>
+
+  <script type="text/template" id="note-template">
+    <header>
+      <input name="title" type="text" placeholder="Your title here..." value="<%= note.get('title') %>">
+    </header>
+    <div id="editor">
+      <textarea name="body"><%= note.get('body') %></textarea>
+    </div>
+    <div id="preview">
+    </div>
+    <footer>
+      <button class="save">Save</button>
+    </footer>
+  </script>
+  <!-- end -->
+</body>
+</html>

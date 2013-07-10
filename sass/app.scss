@@ -1,0 +1,226 @@
+@import 'normalize';
+@import 'foundation';
+@import 'compass/css3';
+
+$black: #211F1E;
+$blue: #1F79D7;
+
+$header-bg: #211F1E;
+$sidebar-bg: #EAEAEA;
+
+// COMMON
+// ======================================/
+
+* {
+  @include box-sizing(border-box);
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+button, .button {
+  @include box-shadow(none);
+}
+
+// HEADER
+// ======================================/
+#header {
+  @include background-image(linear-gradient(top, lighten($header-bg, 5%), $header-bg));
+
+  border-bottom: 1px solid darken($header-bg, 5%);
+  padding: 1em 1em;
+
+  h1 {
+    color: white;
+    font-size: 1em;
+    line-height: 1;
+    margin: 0;
+    text-shadow: 0 -1px 0 darken($header-bg, 5%);
+  }
+}
+
+// SIDEBAR
+// ======================================/
+#sidebar {
+  position: fixed;
+  top: 3em;
+  bottom: 0;
+  left: 0;
+
+  background-color: $sidebar-bg;
+  border-right: 1px solid darken($sidebar-bg, 15%);
+  overflow-y: auto;
+  padding-top: 4em;
+  width: 22em;
+
+  > .controls {
+    @include clearfix;
+    @include box-shadow(inset 0 1px 0 lighten($sidebar-bg, 5%));
+
+    position: fixed;
+    top: 3em;
+    left: 0;
+    width: 22em;
+
+    background-color: darken($sidebar-bg, 5%);
+    border-bottom: 1px solid darken($sidebar-bg, 15%);
+    border-right: 1px solid darken($sidebar-bg, 15%);
+    padding: 1em;
+
+    input, button {
+      margin-bottom: 0;
+      float: left;
+    }
+
+    input {
+      background-color: white;
+      border-color: darken($sidebar-bg, 25%);
+      color: $black;
+      font-weight: bold;
+      width: 70%;
+    }
+
+    button {
+      background-color: $blue;
+      border-color: $blue;
+      border-bottom-size: 2px;
+      color: white;
+      padding: .4em 0;
+      text-shadow: none;
+      width: 30%;
+    }
+  }
+
+  ul.side-nav {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    @include box-shadow(inset 0 1px 0 lighten($sidebar-bg, 5%));
+
+    border-bottom: 1px solid darken($sidebar-bg, 15%);
+    margin: 0;
+    padding: .5em 1em;
+
+    .title {
+      font-weight: bold;
+    }
+
+    .controls {
+      font-size: .8em;
+
+      span {
+        margin-right: 1em;
+        color: $blue;
+        cursor: pointer;
+
+        i {
+          color: $black;
+        }
+      }
+    }
+  }
+}
+
+// Main
+// ======================================/
+#main {
+  position: fixed;
+  top: 3em;
+  right: 0;
+  bottom: 0;
+  left: 22em;
+
+  background: white;
+}
+
+// Note
+// ======================================/
+#note {
+  position: relative;
+  height: 100%;
+
+  > header {
+    @include box-shadow(inset 0 1px 0 lighten($sidebar-bg, 5%));
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    background-color: darken($sidebar-bg, 5%);
+    border-bottom: 1px solid darken($sidebar-bg, 15%);
+    padding: 1em;
+
+    input {
+      @include box-shadow(none);
+
+      background-color: transparent;
+      border-color: transparent;
+      border-bottom-color: darken($sidebar-bg, 25%);
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+  }
+
+  > footer {
+    @include box-shadow(inset 0 1px 0 lighten($sidebar-bg, 5%));
+    @include clearfix;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: darken($sidebar-bg, 5%);
+    border-top: 1px solid darken($sidebar-bg, 15%);
+    padding: 1em;
+
+    button {
+      background-color: $blue;
+      border-color: $blue;
+      border-bottom-size: 2px;
+      color: white;
+      float: right;
+      margin-bottom: 0;
+      padding: .4em 1em;
+      text-shadow: none;
+    }
+  }
+
+  #editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    border-bottom: 1px solid darken($sidebar-bg, 15%);
+    height: 50%;
+    padding-top: 4em;
+
+    textarea {
+      @include box-shadow(none);
+
+      border: none;
+      height: 100%;
+      padding: 1em;
+    }
+  }
+  #preview {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: white;
+    height: 50%;
+    overflow-y: auto;
+    padding: 1em;
+    padding-bottom: 5em;
+  }
+}
