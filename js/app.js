@@ -27,7 +27,23 @@
         }
       });
 
-      Backbone.Model.prototype.save.apply(this, attributes, options);
+      Backbone.Model.prototype.save.call(this, attributes, options);
+    },
+
+    get: function(attribute) {
+      switch (attribute) {
+        case 'body':
+          var body = this.attributes['body'];
+
+          if (typeof body === 'string') {
+            return body;
+          } else {
+            return body['und']['0']['value'];
+          }
+          break;
+        default:
+          return Backbone.Model.prototype.get.call(this, attribute);
+      }
     }
   });
 
@@ -57,7 +73,14 @@
         var self = this;
 
         $(this.el).html(this.template({note: this.model}));
-        $('#editor textarea').trigger('keyup');
+        $('[name=title], [name=body]', this.el).on('keyup', function() {
+          self.model.set('title', self.getTitle());
+          self.model.set('body', self.getBody());
+        });
+
+        if (this.model.isNew()) {
+          this.enableSave();
+        }
 
         return this;
       },
@@ -71,10 +94,7 @@
       save: function() {
         var self = this;
 
-        this.model.set('title', this.getTitle());
-        this.model.set('body', this.getBody());
-
-        this.model.save({
+        this.model.save(null, {
           success: self.disableSave,
           error: function() {
             alert('Could not save: ' + self.model.get('title'));
@@ -83,11 +103,11 @@
       },
 
       enableSave: function() {
-        $('button', this.el).removeAttr('disabled');
+        $('.save', this.el).removeAttr('disabled');
       },
 
       disableSave: function() {
-        $('button', this.el).attr('disabled', 'disabled');
+        $('.save', this.el).attr('disabled', 'disabled');
       },
 
       getTitle: function() {
@@ -141,6 +161,7 @@
         });
 
         $('#main').html(currentNoteView.render().el);
+        $('#editor textarea').trigger('keyup');
       }
     });
 
