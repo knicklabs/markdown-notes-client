@@ -27,7 +27,7 @@
         }
       });
 
-      Backbone.Model.prototype.save.call(this, attributes, options);
+      Backbone.Model.prototype.save.apply(this, [attributes, options]);
     },
 
     get: function(attribute) {
@@ -228,7 +228,6 @@
     });
 
     // Initialize the app
-    var site = { title: 'Markdown Note Client' };
     $('body').prepend(_.template($('#main-template').html())());
 
     new ListView();
