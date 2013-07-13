@@ -51,7 +51,7 @@
 
   var Notes = Backbone.Collection.extend({
     model: Note,
-    url: 'http://api.markdown-notes.com/notes/notes'
+    url: 'http://api.markdown-notes.com/notes/all'
   });
 
 
