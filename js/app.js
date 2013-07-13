@@ -35,10 +35,12 @@
         case 'body':
           var body = this.attributes['body'];
 
-          if (typeof body === 'string') {
+          if (body && typeof body === 'string') {
             return body;
-          } else {
+          } else if (body) {
             return body['und']['0']['value'];
+          } else {
+            return '';
           }
           break;
         default:
